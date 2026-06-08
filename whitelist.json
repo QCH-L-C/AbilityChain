@@ -9,6 +9,12 @@
       "genesis-block.json",
       "package.json",
 
+      "runtime.js",
+      "start.js",
+      "server.js",
+      "linked-hash.js",
+      ".github/workflows/ci.yml",
+
       "global/auth.js",
       "global/popup.html",
       "global/quadruplex-engine.js",
