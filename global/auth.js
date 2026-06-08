@@ -1,25 +1,22 @@
 // /global/auth.js
-// AbilityChain – Global Authentication System (FINAL)
+// AbilityChain – Global Authentication System (Quadruplex-kompatibel)
 
 import { PZQQETFUSIONMASTER } from "../wallet/pzqqet-0_standard.js";
 
 const ABILITY_USER_KEY = "ability.user";
 
 // ------------------------------------------------------------
-// DYNAMISCHER PFAD ZU popup.html (funktioniert überall!)
+// DYNAMISCHER PFAD ZU popup.html
 // ------------------------------------------------------------
 function resolvePopupPath() {
-  // Beispiel: /RFOF-GOLDEN-AbilityChain/wallet/index.html
   const parts = window.location.pathname.split("/");
-  parts.pop(); // index.html entfernen
-  const base = parts.join("/"); // /RFOF-GOLDEN-AbilityChain/wallet
-
-  // eine Ebene hoch → /RFOF-GOLDEN-AbilityChain/global/popup.html
+  parts.pop();
+  const base = parts.join("/");
   return base + "/../global/popup.html";
 }
 
 // ------------------------------------------------------------
-// USER SESSION
+// SESSION
 // ------------------------------------------------------------
 export function getCurrentUser() {
   const raw = localStorage.getItem(ABILITY_USER_KEY);
@@ -47,7 +44,7 @@ export function logout() {
 }
 
 // ------------------------------------------------------------
-// INITIALISIERUNG
+// INIT
 // ------------------------------------------------------------
 export function initAuthUI() {
   injectPopup();
@@ -55,7 +52,7 @@ export function initAuthUI() {
 }
 
 // ------------------------------------------------------------
-// POPUP LOADER
+// POPUP LOAD
 // ------------------------------------------------------------
 function injectPopup() {
   if (document.getElementById("auth-overlay")) return;
@@ -137,9 +134,7 @@ function attachPopupHandlers() {
     };
   });
 
-  // ------------------------------------------------------------
   // REGISTER
-  // ------------------------------------------------------------
   const regUser = document.getElementById("reg-user");
   const regPw1 = document.getElementById("reg-pw1");
   const regPw2 = document.getElementById("reg-pw2");
@@ -174,9 +169,7 @@ function attachPopupHandlers() {
     };
   }
 
-  // ------------------------------------------------------------
   // LOGIN
-  // ------------------------------------------------------------
   const loginUser = document.getElementById("login-user");
   const loginPw1 = document.getElementById("login-pw1");
   const loginBtn = document.getElementById("login-btn");
