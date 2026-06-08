@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>RFOF-GOLDEN AbilityChain</title>
+
+  <style>
+    body {
+      margin: 0;
+      background: #000;
+      color: #FFD700;
+      font-family: system-ui, sans-serif;
+      text-align: center;
+      padding-top: 100px;
+    }
+    a {
+      color: #FFD700;
+      text-decoration: none;
+      font-weight: bold;
+      display: block;
+      margin: 20px;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>RFOF-GOLDEN AbilityChain</h1>
+  <p>Willkommen im vereinigten System aus RFOF, GoldenChain und PZQQET‑0.</p>
+
+  <a href="chain/explorer/index.html">🔗 Explorer öffnen</a>
+  <a href="wallet/index.html">💰 Wallet öffnen</a>
+
+  <div style="margin-top:40px;">
+    <button data-auth="login" id="btn-login">Login / Register</button>
+    <button data-auth="settings" id="btn-settings" style="display:none;">Settings</button>
+    <button data-auth="logout" id="btn-logout" style="display:none;">Logout</button>
+  </div>
+
+  <footer>
+    <p>© 2026 AbilityChain – PZQQET‑0 Standard</p>
+  </footer>
+
+  <script type="module">
+    import { initAuthUI, isLoggedIn, logout } from "./global/auth.js";
+
+    initAuthUI();
+
+    const btnLogin = document.getElementById("btn-login");
+    const btnSettings = document.getElementById("btn-settings");
+    const btnLogout = document.getElementById("btn-logout");
+
+    function updateButtons() {
+      if (isLoggedIn()) {
+        btnLogin.style.display = "none";
+        btnSettings.style.display = "inline-block";
+        btnLogout.style.display = "inline-block";
+      } else {
+        btnLogin.style.display = "inline-block";
+        btnSettings.style.display = "none";
+        btnLogout.style.display = "none";
+      }
+    }
+
+    updateButtons();
+
+    btnLogout.addEventListener("click", () => {
+      logout();
+      updateButtons();
+    });
+
+    btnSettings.addEventListener("click", () => {
+      window.location.href = "settings/index.html";
+    });
+  </script>
+
+</body>
+</html>
