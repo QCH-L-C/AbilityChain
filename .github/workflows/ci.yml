@@ -8,7 +8,7 @@ on:
 
 jobs:
   prai-runtime:
-    runs-on: [ubuntu-latest, rfof-network, prai]
+    runs-on: ubuntu-latest
 
     permissions:
       contents: write
@@ -20,7 +20,7 @@ jobs:
 
       - name: Start Runtime Kernel (Axiom Mode)
         run: |
-          echo "PRAI / RFOF-NETWORK Kernel gestartet"
+          echo "PRAI Kernel gestartet"
           echo "Axiomatische 0ms-Fraktalprüfung wird in runtime.js ausgeführt"
           node runtime.js
 
