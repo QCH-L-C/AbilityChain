@@ -1,0 +1,35 @@
+{
+  "genesis": {
+    "id": 0,
+    "timestamp": "PZQQET-GENESIS",
+    "hashAlgorithm": "sha256",
+
+    "includes": {
+      "registry": "sha256:REGISTRY_HASH",
+      "whitelist": "sha256:WHITELIST_HASH",
+
+      "index.html": "sha256:HASH_INDEX",
+      "README.md": "sha256:HASH_README",
+      "LICENSE.md": "sha256:HASH_LICENSE",
+      "package.json": "sha256:HASH_PACKAGE",
+
+      "runtime.js": "sha256:HASH_RUNTIME",
+      "start.js": "sha256:HASH_START",
+      "server.js": "sha256:HASH_SERVER",
+      "linked-hash.js": "sha256:HASH_LINKED_HASH",
+      ".github/workflows/ci.yml": "sha256:HASH_CI",
+
+      "global/auth.js": "sha256:HASH_AUTH",
+      "global/popup.html": "sha256:HASH_POPUP",
+      "global/quadruplex-engine.js": "sha256:HASH_QUAD_ENGINE",
+
+      "wallet/index.html": "sha256:HASH_WALLET_INDEX",
+      "wallet/pzqqet-0_standard.js": "sha256:HASH_PZQQET0",
+
+      "chain/explorer/index.html": "sha256:HASH_EXPLORER",
+      "settings/index.html": "sha256:HASH_SETTINGS"
+    },
+
+    "masterHash": "sha256:MASTER_HASH"
+  }
+}
