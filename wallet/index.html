@@ -83,6 +83,7 @@
     <p>Quadruplex‑System · px/Pixel‑Determinismus</p>
 </header>
 
+<!-- Auth‑System steuert Sichtbarkeit -->
 <div id="wallet-ui" style="display:none;">
 
     <div class="balance-box">
@@ -106,8 +107,11 @@
     <div class="actions">
         <button id="btn-send">Senden</button>
         <button id="btn-receive">Empfangen</button>
+
         <button id="btn-explorer">Explorer</button>
-        <button id="btn-settings">Settings</button>
+
+        <!-- Auth‑System integriert -->
+        <button id="btn-settings" data-auth="settings">Settings</button>
     </div>
 
 </div>
@@ -137,9 +141,9 @@
         grid.innerHTML = "";
 
         const orbit = buildOrbitSignature(
-            1,   // Dual
-            0,   // Trinitär
-            { x: 0, y: 0 } // Pixel
+            1,
+            0,
+            { x: 0, y: 0 }
         );
 
         orbit.forEach(hash => {
