@@ -21,11 +21,10 @@ jobs:
       - name: Start Runtime Kernel (Axiom Mode)
         run: |
           echo "PRAI Kernel gestartet"
-          echo "Axiomatische 0ms-Fraktalprüfung wird in runtime.js ausgeführt"
-          node runtime.js
+          node runtime.js &
 
       - name: Start JSON-RPC Node
-        run: node start.js
+        run: node start.js &
 
       - name: Linked Hash Fractal Validation
         run: node linked-hash.js
@@ -33,8 +32,7 @@ jobs:
       - name: Deploy (Integrated)
         run: |
           echo "DEPLOY wird durch CI ausgeführt"
-          echo "Kein deploy.yml notwendig"
-          node server.js
+          node server.js &
 
       - name: Auto-Merge Pull Request
         if: github.event_name == 'pull_request'
