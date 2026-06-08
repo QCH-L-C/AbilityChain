@@ -9,10 +9,7 @@ const ABILITY_USER_KEY = "ability.user";
 // DYNAMISCHER PFAD ZU popup.html
 // ------------------------------------------------------------
 function resolvePopupPath() {
-  const parts = window.location.pathname.split("/");
-  parts.pop();
-  const base = parts.join("/");
-  return base + "/../global/popup.html";
+  return "/global/popup.html";
 }
 
 // ------------------------------------------------------------
