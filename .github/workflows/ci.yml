@@ -8,7 +8,7 @@ on:
 
 jobs:
   prai-runtime:
-    runs-on: [rfof-network, prai]
+    runs-on: [ubuntu-latest, rfof-network, prai]
 
     permissions:
       contents: write
