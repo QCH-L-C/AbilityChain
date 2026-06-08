@@ -1,0 +1,11 @@
+{
+  "name": "prai-genesis-final-kernel",
+  "version": "1.0.0",
+  "description": "AbilityChain / PRAI Genesis Kernel",
+  "license": "SEE LICENSE.md",
+  "private": true,
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "engineStrict": true
+}
