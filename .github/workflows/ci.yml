@@ -30,6 +30,12 @@ jobs:
       - name: Linked Hash Fractal Validation
         run: node linked-hash.js
 
+      - name: Deploy (Integrated)
+        run: |
+          echo "DEPLOY wird durch CI ausgeführt"
+          echo "Kein deploy.yml notwendig"
+          node server.js
+
       - name: Auto-Merge Pull Request
         if: github.event_name == 'pull_request'
         run: gh pr merge ${{ github.event.pull_request.number }} --squash --auto
