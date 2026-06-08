@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>AbilityChain Settings – Quadruplex</title>
+
+    <style>
+        body {
+            margin: 0;
+            background: #000;
+            color: #FFD700;
+            font-family: system-ui, sans-serif;
+        }
+
+        header {
+            padding: 20px;
+            text-align: center;
+            border-bottom: 2px solid #FFD700;
+        }
+
+        .settings-box {
+            width: 90%;
+            margin: 20px auto;
+            padding: 20px;
+            background: #111;
+            border: 1px solid #FFD700;
+            border-radius: 6px;
+        }
+
+        .settings-box h3 {
+            margin-top: 0;
+        }
+
+        .setting-item {
+            margin-bottom: 20px;
+        }
+
+        .setting-item label {
+            display: block;
+            margin-bottom: 6px;
+        }
+
+        .setting-item input {
+            width: 100%;
+            padding: 8px;
+            background: #000;
+            border: 1px solid #FFD700;
+            color: #FFD700;
+            border-radius: 4px;
+        }
+
+        .actions {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .actions button {
+            background: #0055FF;
+            color: #FFD700;
+            border: none;
+            padding: 10px 16px;
+            margin: 6px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        #logout-btn {
+            background: #AA0000;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>Settings</h1>
+    <p>Account · Quadruplex · System</p>
+</header>
+
+<div class="settings-box">
+
+    <h3>Account</h3>
+
+    <div class="setting-item">
+        <label>Username</label>
+        <input id="username" disabled>
+    </div>
+
+    <div class="setting-item">
+        <label>Mask</label>
+        <input id="mask" disabled>
+    </div>
+
+    <div class="setting-item">
+        <label>Seed‑12</label>
+        <input id="seed12" disabled>
+    </div>
+
+    <div class="setting-item">
+        <label>Seed‑24</label>
+        <input id="seed24" disabled>
+    </div>
+
+</div>
+
+<div class="settings-box">
+
+    <h3>Quadruplex‑System</h3>
+
+    <div class="setting-item">
+        <label>Dual‑Achse</label>
+        <input id="dual-axis" disabled>
+    </div>
+
+    <div class="setting-item">
+        <label>Trinitär‑Achse</label>
+        <input id="tri-axis" disabled>
+    </div>
+
+    <div class="setting-item">
+        <label>Trival‑Zelle</label>
+        <input id="trival-cell" disabled>
+    </div>
+
+    <div class="setting-item">
+        <label>Pixel‑Position</label>
+        <input id="pixel-pos" disabled>
+    </div>
+
+</div>
+
+<div class="actions">
+    <button id="btn-wallet">Wallet</button>
+    <button id="btn-explorer">Explorer</button>
+    <button id="btn-root">Home</button>
+    <button id="logout-btn">Logout</button>
+</div>
+
+<script type="module">
+    import { initAuthUI, isLoggedIn, getCurrentUser, logout } from "../../global/auth.js";
+    import { createQuadruplexState } from "../../global/quadruplex-engine.js";
+
+    initAuthUI();
+
+    function renderSettings() {
+        if (!isLoggedIn()) return;
+
+        const user = getCurrentUser();
+        if (!user) return;
+
+        document.getElementById("username").value = user.username;
+        document.getElementById("mask").value = user.mask;
+        document.getElementById("seed12").value = user.seed12.join(" ");
+        document.getElementById("seed24").value = user.seed24.join(" ");
+
+        // Beispiel‑Quadruplex‑State
+        const q = createQuadruplexState(
+            1,  // Dual
+            0,  // Trinitär
+            4,  // Trival (Mitte)
+            { x: 0, y: 0 }
+        );
+
+        document.getElementById("dual-axis").value = q.dual;
+        document.getElementById("tri-axis").value = q.tri;
+        document.getElementById("trival-cell").value = `Index ${q.trival.index} (tx=${q.trival.tx}, ty=${q.trival.ty})`;
+        document.getElementById("pixel-pos").value = `x=${q.pixel.x}, y=${q.pixel.y}`;
+    }
+
+    renderSettings();
+
+    document.getElementById("btn-wallet").onclick = () => {
+        window.location.href = "../../wallet/index.html";
+    };
+
+    document.getElementById("btn-explorer").onclick = () => {
+        window.location.href = "../../chain/explorer/index.html";
+    };
+
+    document.getElementById("btn-root").onclick = () => {
+        window.location.href = "../../index.html";
+    };
+
+    document.getElementById("logout-btn").onclick = () => {
+        logout();
+        window.location.href = "../../index.html";
+    };
+</script>
+
+</body>
+</html>
