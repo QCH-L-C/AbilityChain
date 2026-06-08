@@ -23,7 +23,8 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Set Node Version (Matrix)
-        run: echo "Node Runtime: ${{ matrix.node-version }}"
+        run: |
+          echo "Node Runtime: ${{ matrix.node-version }}"
 
       - name: Start Runtime Kernel
         run: node runtime.js
