@@ -30,6 +30,14 @@
       "settings/index.html": "sha256:HASH_SETTINGS"
     },
 
+    "axiomMatrix": {
+      "mode": "fractal-bidirectional-0ms",
+      "states": [
+        "e1","e2","e3","e4","e5","e6","e7","e8","e9",
+        "eN-","e","N","N+","N++","N+++"
+      ]
+    },
+
     "masterHash": "sha256:MASTER_HASH"
   }
 }
