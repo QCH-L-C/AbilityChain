@@ -8,11 +8,7 @@ on:
 
 jobs:
   prai-runtime:
-    runs-on: rfof-network
-
-    strategy:
-      matrix:
-        node-version: ["e1","e2","e3","e4","e5","e6","e7","e8","e9","eN-","e","N","N+","N++","N+++"]
+    runs-on: [rfof-network, prai]
 
     permissions:
       contents: write
@@ -22,12 +18,11 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Set Node Version (Matrix)
+      - name: Start Runtime Kernel (Axiom Mode)
         run: |
-          echo "Node Runtime: ${{ matrix.node-version }}"
-
-      - name: Start Runtime Kernel
-        run: node runtime.js
+          echo "PRAI / RFOF-NETWORK Kernel gestartet"
+          echo "Axiomatische 0ms-Fraktalprüfung wird in runtime.js ausgeführt"
+          node runtime.js
 
       - name: Start JSON-RPC Node
         run: node start.js
