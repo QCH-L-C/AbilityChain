@@ -98,14 +98,17 @@
 
     <div class="actions">
         <button id="btn-wallet">Wallet</button>
-        <button id="btn-settings">Settings</button>
+
+        <!-- Auth‑System integriert -->
+        <button id="btn-settings" data-auth="settings">Settings</button>
+
         <button id="btn-root">Home</button>
     </div>
 
 </div>
 
 <script type="module">
-    import { initAuthUI, isLoggedIn } from "../../global/auth.js";
+    import { initAuthUI } from "../../global/auth.js";
     import { buildOrbitSignature } from "../../global/quadruplex-engine.js";
 
     initAuthUI();
@@ -114,11 +117,10 @@
         const grid = document.getElementById("orbit-grid");
         grid.innerHTML = "";
 
-        // Explorer nutzt Pixel (0,0) als Basis
         const orbit = buildOrbitSignature(
-            1,   // Dual
-            0,   // Trinitär
-            { x: 0, y: 0 } // Pixel
+            1,
+            0,
+            { x: 0, y: 0 }
         );
 
         orbit.forEach(hash => {

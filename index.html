@@ -45,36 +45,15 @@
   </footer>
 
   <script type="module">
-    import { initAuthUI, isLoggedIn, logout } from "./global/auth.js";
+    import { initAuthUI } from "./global/auth.js";
 
+    // Auth‑System übernimmt ALLES (Login, Logout, Sichtbarkeit)
     initAuthUI();
 
-    const btnLogin = document.getElementById("btn-login");
-    const btnSettings = document.getElementById("btn-settings");
-    const btnLogout = document.getElementById("btn-logout");
-
-    function updateButtons() {
-      if (isLoggedIn()) {
-        btnLogin.style.display = "none";
-        btnSettings.style.display = "inline-block";
-        btnLogout.style.display = "inline-block";
-      } else {
-        btnLogin.style.display = "inline-block";
-        btnSettings.style.display = "none";
-        btnLogout.style.display = "none";
-      }
-    }
-
-    updateButtons();
-
-    btnLogout.addEventListener("click", () => {
-      logout();
-      updateButtons();
-    });
-
-    btnSettings.addEventListener("click", () => {
-      window.location.href = "settings/index.html";
-    });
+    // KEINE eigene Button‑Logik mehr
+    // KEIN updateButtons()
+    // KEIN logout() Handler
+    // KEINE manuelle Sichtbarkeitssteuerung
   </script>
 
 </body>
