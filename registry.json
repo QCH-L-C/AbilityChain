@@ -1,0 +1,40 @@
+{
+  "name": "abilitychain-registry",
+  "version": "1.0.0",
+  "license": "RFOF-EXTENSION-LICENSE (REL) v1.0",
+  "licenseFile": "LICENSE.md",
+  "generatedAt": "2026-06-08T18:55:00Z",
+  "blocks": [
+    { "id": "root-index", "path": "index.html", "hash": "sha256-0000000000000000000000000000000000000000000000000000000000000000", "licenseId": "REL-v1.0" },
+
+    { "id": "readme", "path": "README.md", "hash": "sha256-1111111111111111111111111111111111111111111111111111111111111111", "licenseId": "REL-v1.0" },
+    { "id": "license", "path": "LICENSE.md", "hash": "sha256-1111111111111111111111111111111111111111111111111111111111111112", "licenseId": "REL-v1.0" },
+    { "id": "registry", "path": "registry.json", "hash": "sha256-1111111111111111111111111111111111111111111111111111111111111113", "licenseId": "REL-v1.0" },
+    { "id": "whitelist", "path": "whitelist.json", "hash": "sha256-1111111111111111111111111111111111111111111111111111111111111114", "licenseId": "REL-v1.0" },
+    { "id": "genesis-block", "path": "genesis-block.json", "hash": "sha256-1111111111111111111111111111111111111111111111111111111111111115", "licenseId": "REL-v1.0" },
+    { "id": "package", "path": "package.json", "hash": "sha256-1111111111111111111111111111111111111111111111111111111111111116", "licenseId": "REL-v1.0" },
+
+    { "id": "runtime", "path": "runtime.js", "hash": "sha256-1111111111111111111111111111111111111111111111111111111111111117", "licenseId": "REL-v1.0" },
+    { "id": "start", "path": "start.js", "hash": "sha256-1111111111111111111111111111111111111111111111111111111111111118", "licenseId": "REL-v1.0" },
+    { "id": "server", "path": "server.js", "hash": "sha256-1111111111111111111111111111111111111111111111111111111111111119", "licenseId": "REL-v1.0" },
+    { "id": "linked-hash", "path": "linked-hash.js", "hash": "sha256-1111111111111111111111111111111111111111111111111111111111111120", "licenseId": "REL-v1.0" },
+
+    { "id": "ci-workflow", "path": ".github/workflows/ci.yml", "hash": "sha256-1111111111111111111111111111111111111111111111111111111111111121", "licenseId": "REL-v1.0" },
+
+    { "id": "global-auth", "path": "global/auth.js", "hash": "sha256-2222222222222222222222222222222222222222222222222222222222222221", "licenseId": "REL-v1.0" },
+    { "id": "global-popup", "path": "global/popup.html", "hash": "sha256-2222222222222222222222222222222222222222222222222222222222222222", "licenseId": "REL-v1.0" },
+    { "id": "global-quad-engine", "path": "global/quadruplex-engine.js", "hash": "sha256-2222222222222222222222222222222222222222222222222222222222222223", "licenseId": "REL-v1.0" },
+
+    { "id": "wallet-index", "path": "wallet/index.html", "hash": "sha256-3333333333333333333333333333333333333333333333333333333333333331", "licenseId": "REL-v1.0" },
+    { "id": "wallet-pzqqet0", "path": "wallet/pzqqet-0_standard.js", "hash": "sha256-3333333333333333333333333333333333333333333333333333333333333332", "licenseId": "REL-v1.0" },
+
+    { "id": "explorer-index", "path": "chain/explorer/index.html", "hash": "sha256-4444444444444444444444444444444444444444444444444444444444444441", "licenseId": "REL-v1.0" },
+
+    { "id": "settings-index", "path": "settings/index.html", "hash": "sha256-5555555555555555555555555555555555555555555555555555555555555551", "licenseId": "REL-v1.0" }
+  ],
+
+  "modules": [
+    { "id": "module-quad-engine", "path": "global/quadruplex-engine.js", "hash": "sha256-2222222222222222222222222222222222222222222222222222222222222223", "licenseId": "REL-v1.0" },
+    { "id": "module-pzqqet0", "path": "wallet/pzqqet-0_standard.js", "hash": "sha256-3333333333333333333333333333333333333333333333333333333333333332", "licenseId": "REL-v1.0" }
+  ]
+}
