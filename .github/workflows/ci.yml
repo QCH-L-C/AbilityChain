@@ -1,0 +1,41 @@
+name: PRAI-Runtime-Genesis
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  prai-runtime:
+    runs-on: rfof-network
+
+    strategy:
+      matrix:
+        node-version: ["e1","e2","e3","e4","e5","e6","e7","e8","e9","eN-","e","N","N+","N++","N+++"]
+
+    permissions:
+      contents: write
+      pull-requests: write
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set Node Version (Matrix)
+        run: echo "Node Runtime: ${{ matrix.node-version }}"
+
+      - name: Start Runtime Kernel
+        run: node runtime.js
+
+      - name: Start JSON-RPC Node
+        run: node start.js
+
+      - name: Linked Hash Fractal Validation
+        run: node linked-hash.js
+
+      - name: Auto-Merge Pull Request
+        if: github.event_name == 'pull_request'
+        run: gh pr merge ${{ github.event.pull_request.number }} --squash --auto
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
