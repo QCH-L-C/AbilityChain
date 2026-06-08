@@ -133,11 +133,13 @@
     <button id="btn-wallet">Wallet</button>
     <button id="btn-explorer">Explorer</button>
     <button id="btn-root">Home</button>
-    <button id="logout-btn">Logout</button>
+
+    <!-- Auth‑System integriert -->
+    <button id="logout-btn" data-auth="logout">Logout</button>
 </div>
 
 <script type="module">
-    import { initAuthUI, isLoggedIn, getCurrentUser, logout } from "../../global/auth.js";
+    import { initAuthUI, isLoggedIn, getCurrentUser } from "../../global/auth.js";
     import { createQuadruplexState } from "../../global/quadruplex-engine.js";
 
     initAuthUI();
@@ -153,11 +155,10 @@
         document.getElementById("seed12").value = user.seed12.join(" ");
         document.getElementById("seed24").value = user.seed24.join(" ");
 
-        // Beispiel‑Quadruplex‑State
         const q = createQuadruplexState(
-            1,  // Dual
-            0,  // Trinitär
-            4,  // Trival (Mitte)
+            1,
+            0,
+            4,
             { x: 0, y: 0 }
         );
 
@@ -178,11 +179,6 @@
     };
 
     document.getElementById("btn-root").onclick = () => {
-        window.location.href = "../../index.html";
-    };
-
-    document.getElementById("logout-btn").onclick = () => {
-        logout();
         window.location.href = "../../index.html";
     };
 </script>
