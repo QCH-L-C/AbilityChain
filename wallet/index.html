@@ -3,76 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <title>Ability Wallet – Quadruplex System</title>
-
     <style>
-        body {
-            margin: 0;
-            background: #000;
-            color: #FFD700;
-            font-family: system-ui, sans-serif;
-        }
-
-        header {
-            padding: 20px;
-            text-align: center;
-            border-bottom: 2px solid #FFD700;
-        }
-
-        .balance-box {
-            margin: 20px auto;
-            width: 300px;
-            padding: 20px;
-            border: 2px solid #FFD700;
-            border-radius: 8px;
-            text-align: center;
-        }
-
-        .seed-box {
-            margin: 20px auto;
-            width: 90%;
-            padding: 10px;
-            border: 1px solid #FFD700;
-            border-radius: 6px;
-            font-size: 14px;
-            background: #111;
-        }
-
-        .actions {
-            margin-top: 20px;
-            text-align: center;
-        }
-
-        .actions button {
-            background: #0055FF;
-            color: #FFD700;
-            border: none;
-            padding: 10px 16px;
-            margin: 6px;
-            cursor: pointer;
-            border-radius: 4px;
-        }
-
-        #orbit-grid {
-            margin: 30px auto;
-            width: 180px;
-            display: grid;
-            grid-template-columns: repeat(3, 60px);
-            gap: 4px;
-        }
-
-        .orbit-cell {
-            width: 60px;
-            height: 60px;
-            background: #111;
-            border: 1px solid #FFD700;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 10px;
-            text-align: center;
-            padding: 4px;
-            word-break: break-all;
-        }
+        body { margin: 0; background: #000; color: #FFD700; font-family: system-ui, sans-serif; }
+        header { padding: 20px; text-align: center; border-bottom: 2px solid #FFD700; }
+        .balance-box { margin: 20px auto; width: 300px; padding: 20px; border: 2px solid #FFD700; border-radius: 8px; text-align: center; }
+        .seed-box { margin: 20px auto; width: 90%; padding: 10px; border: 1px solid #FFD700; border-radius: 6px; font-size: 14px; background: #111; }
+        .actions { margin-top: 20px; text-align: center; }
+        .actions button { background: #0055FF; color: #FFD700; border: none; padding: 10px 16px; margin: 6px; cursor: pointer; border-radius: 4px; }
+        #orbit-grid { margin: 30px auto; width: 180px; display: grid; grid-template-columns: repeat(3, 60px); gap: 4px; }
+        .orbit-cell { width: 60px; height: 60px; background: #111; border: 1px solid #FFD700; display: flex; align-items: center; justify-content: center; font-size: 10px; text-align: center; padding: 4px; word-break: break-all; }
     </style>
 </head>
 
@@ -83,69 +22,54 @@
     <p>Quadruplex‑System · px/Pixel‑Determinismus</p>
 </header>
 
-<!-- Auth‑System steuert Sichtbarkeit -->
-<div id="wallet-ui" style="display:none;">
-
+<div id="wallet-ui">
     <div class="balance-box">
         <h2>Kontostand</h2>
         <p id="wallet-balance">0.0000 ACU</p>
     </div>
-
     <div class="seed-box">
-        <strong>Seed‑12:</strong>
-        <div id="seed12"></div>
+        <strong>Seed‑12:</strong><div id="seed12"></div>
     </div>
-
     <div class="seed-box">
-        <strong>Seed‑24:</strong>
-        <div id="seed24"></div>
+        <strong>Seed‑24:</strong><div id="seed24"></div>
     </div>
-
     <h3 style="text-align:center;margin-top:40px;">Quadruplex Orbit</h3>
     <div id="orbit-grid"></div>
-
     <div class="actions">
         <button id="btn-send">Senden</button>
         <button id="btn-receive">Empfangen</button>
-
         <button id="btn-explorer">Explorer</button>
-
-        <!-- Auth‑System integriert -->
-        <button id="btn-settings" data-auth="settings">Settings</button>
+        <button id="btn-settings" style="display:none;">Settings</button>
+        <button id="btn-logout" style="display:none;">Logout</button>
     </div>
-
 </div>
 
 <script type="module">
-    import { initAuthUI, isLoggedIn, getCurrentUser } from "../global/auth.js";
+    import { isLoggedIn, getCurrentUser, logout } from "../global/auth.js";
     import { buildOrbitSignature } from "../global/quadruplex-engine.js";
 
-    window.addEventListener("DOMContentLoaded", initAuthUI);
+    // 1. HARTER GUARD: Wenn nicht eingeloggt, kein Wallet-Zugriff
+    if (!isLoggedIn()) {
+        alert("Zugriff verweigert: Authentifizierung erforderlich.");
+        window.location.replace("../index.html");
+    }
 
-    function renderWallet() {
-        if (!isLoggedIn()) return;
-
+    // 2. RENDER LOGIK (Nur wenn eingeloggt)
+    function initWallet() {
         const user = getCurrentUser();
-        if (!user) return;
-
         document.getElementById("seed12").textContent = user.seed12.join(" ");
         document.getElementById("seed24").textContent = user.seed24.join(" ");
-
         document.getElementById("wallet-balance").textContent = "0.0000 ACU";
-
         renderOrbit();
+        
+        // Buttons anzeigen
+        document.getElementById("btn-settings").style.display = "inline-block";
+        document.getElementById("btn-logout").style.display = "inline-block";
     }
 
     function renderOrbit() {
         const grid = document.getElementById("orbit-grid");
-        grid.innerHTML = "";
-
-        const orbit = buildOrbitSignature(
-            1,
-            0,
-            { x: 0, y: 0 }
-        );
-
+        const orbit = buildOrbitSignature(1, 0, { x: 0, y: 0 });
         orbit.forEach(hash => {
             const cell = document.createElement("div");
             cell.className = "orbit-cell";
@@ -154,15 +78,12 @@
         });
     }
 
-    renderWallet();
+    initWallet();
 
-    document.getElementById("btn-explorer").onclick = () => {
-        window.location.href = "../chain/explorer/index.html";
-    };
-
-    document.getElementById("btn-settings").onclick = () => {
-        window.location.href = "../settings/index.html";
-    };
+    // 3. NAVIGATION
+    document.getElementById("btn-explorer").onclick = () => window.location.href = "../chain/explorer/index.html";
+    document.getElementById("btn-settings").onclick = () => window.location.href = "../settings/index.html";
+    document.getElementById("btn-logout").onclick = () => logout();
 </script>
 
 </body>
