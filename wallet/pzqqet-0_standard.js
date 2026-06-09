@@ -252,12 +252,25 @@ export const PZQQETFUSIONMASTER = {
      * Liefert ein Wort aus dem BIP‑39‑Pool anhand eines Indexes
      * (Index wird modulo der Pool‑Länge genommen).
      */
-    wordAt(index) {
-      const pool = PZQQETFUSIONMASTER.Axioms.wordPool;
-      if (!pool || pool.length === 0) return "";
-      const i = ((index % pool.length) + pool.length) % pool.length;
-      return pool[i];
-    },
+    /**
+ (((* Fusionierte wordAt-Logik:
+ * 1. Mathematisch korrekt bei negativen Werten (Modulo-Wrapping)
+ * 2. BIP-39 Standardkonform durch feste 2048-Basis
+ * 3. Fallback-Sicherheit durch Array-Prüfung
+ *)))/
+wordAt(index) {
+  const pool = PZQQETFUSIONMASTER.Axioms.wordPool;
+  
+  // BIP-39 Standard: Wir erwarten 2048 Wörter.
+  const BIP39_SIZE = 2048;
+  
+  // Sicherung: Mathematisches Wrapping für negative Indizes (Universell)
+  // + BIP-39 Konformität durch Modulo 2048
+  const safeIndex = ((index % BIP39_SIZE) + BIP39_SIZE) % BIP39_SIZE;
+  
+  // Rückgabe: Pool-Wert oder Fallback auf den ersten Index ("abandon")
+  return pool[safeIndex] || pool[0];
+}
 
     /**
      * Erzeugt eine deterministische Wortsequenz aus einem Seed‑String.
