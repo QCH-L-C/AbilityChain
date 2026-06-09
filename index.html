@@ -48,7 +48,7 @@
     import { initAuthUI } from "./global/auth.js";
 
     // Auth‑System übernimmt ALLES (Login, Logout, Sichtbarkeit)
-    initAuthUI();
+    window.addEventListener("DOMContentLoaded", initAuthUI);
 
     // KEINE eigene Button‑Logik mehr
     // KEIN updateButtons()
