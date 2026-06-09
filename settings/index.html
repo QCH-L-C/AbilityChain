@@ -142,7 +142,7 @@
     import { initAuthUI, isLoggedIn, getCurrentUser } from "../../global/auth.js";
     import { createQuadruplexState } from "../../global/quadruplex-engine.js";
 
-    initAuthUI();
+    window.addEventListener("DOMContentLoaded", initAuthUI);
 
     function renderSettings() {
         if (!isLoggedIn()) return;
