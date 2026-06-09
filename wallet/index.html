@@ -120,7 +120,7 @@
     import { initAuthUI, isLoggedIn, getCurrentUser } from "../global/auth.js";
     import { buildOrbitSignature } from "../global/quadruplex-engine.js";
 
-    initAuthUI();
+    window.addEventListener("DOMContentLoaded", initAuthUI);
 
     function renderWallet() {
         if (!isLoggedIn()) return;
